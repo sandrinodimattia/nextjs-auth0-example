@@ -10,7 +10,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@auth0/nextjs-auth0": "git+ssh://git@github.com/auth0/nextjs-auth0.git",
+    "@auth0/nextjs-auth0": "https://git@github.com/auth0/nextjs-auth0.git",
     "dotenv": "^8.1.0",
     "isomorphic-unfetch": "^3.0.0",
     "next": "^9.0.5",

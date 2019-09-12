@@ -6,7 +6,7 @@ import { UserProvider } from '../lib/user';
 const Layout = ({ user, loading = false, children }) => (
   <UserProvider value={{ user, loading }}>
     <Head>
-      <title>With Auth0</title>
+      <title>Next.js with Auth0</title>
     </Head>
 
     <Header />

@@ -13,7 +13,7 @@ const Profile = ({ user }) => (
       <pre>{JSON.stringify(user, null, 2)}</pre>
     </div>
   </Layout>
-)
+);
 
 Profile.getInitialProps = async ({ req, res }) => {
   if (typeof window === 'undefined') {
@@ -26,7 +26,7 @@ Profile.getInitialProps = async ({ req, res }) => {
       return;
     }
 
-    return { user }
+    return { user };
   }
 
   const user = await fetchUser();
