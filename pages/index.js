@@ -30,7 +30,7 @@ export default function Home() {
       {user && (
         <>
           <h4>Rendered user info on the client</h4>
-          <pre>{JSON.stringify(user.session, null, 2)}</pre>
+          <pre>{JSON.stringify(user, null, 2)}</pre>
         </>
       )}
     </Layout>

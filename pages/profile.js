@@ -10,15 +10,15 @@ const Profile = ({ user }) => (
 
     <div>
       <h3>Profile (server rendered)</h3>
-      <pre>{JSON.stringify(user.session, null, 2)}</pre>
+      <pre>{JSON.stringify(user, null, 2)}</pre>
     </div>
   </Layout>
 )
 
 Profile.getInitialProps = async ({ req, res }) => {
   if (typeof window === 'undefined') {
-    const session = await auth0.getSession(req);
-    if (!session) {
+    const { user } = await auth0.getSession(req);
+    if (!user) {
       res.writeHead(302, {
         Location: '/api/login'
       });
@@ -26,7 +26,7 @@ Profile.getInitialProps = async ({ req, res }) => {
       return;
     }
 
-    return { user: { session } }
+    return { user }
   }
 
   const user = await fetchUser();
