@@ -59,7 +59,52 @@ This sample tries to cover a few topics:
 
  - Signing in
  - Signing out
+ - Registration
  - Loading the user on the server side and adding it as part of SSR (`/pages/profile.js`)
  - Loading the user on the client side and using fast/cached SSR pages (`/pages/index.js`)
  - API Routes which can load the current user (`/pages/api/me.js`)
  - Using hooks to make the user available throughout the application (`/lib//user.js`)
+
+## Scenarios
+
+### User Registration
+
+When the user is not signed in you'll see a Register and a Login link:
+
+```js
+<li>
+  <a href='/api/register'>Register</a>
+</li>
+<li>
+  <a href='/api/login'>Login</a>
+</li>
+```
+
+The Register link redirects to the `/api/register` API route calling the login handler and passing a custom parameter which sets `prompt=signup`.
+
+```js
+import auth0 from '../../lib/auth0';
+
+export default async function register(req, res) {
+  try {
+    await auth0.handleLogin(req, res, {
+      authParams: {
+        prompt: 'signup'
+      }
+    });
+  } catch(error) {
+    console.error(error)
+    res.status(error.status || 500).end(error.message)
+  }
+}
+```
+
+This parameter is then exposed to the Auth0 login page which can be used to show the signup tab. Note that this only works for the "Classic" experience today. In order to change to the signup tab when this parameter is sent, you'll need to modify the Login page in Auth0 and add the `initialScreen`:
+
+```js
+var lock = new Auth0Lock(config.clientID, config.auth0Domain, {
+  ...
+  initialScreen: (config.extraParams.prompt === 'signup' && 'signUp') || 'login',
+  ...
+});
+```

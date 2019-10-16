@@ -36,9 +36,14 @@ const Header = () => {
                 </li>
               </>
             ) : (
-              <li>
-                <a href='/api/login'>Login</a>
-              </li>
+              <>
+                <li>
+                  <a href='/api/register'>Register</a>
+                </li>
+                <li>
+                  <a href='/api/login'>Login</a>
+                </li>
+              </>
             )
           )}
         </ul>
