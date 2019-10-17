@@ -89,7 +89,7 @@ export default async function register(req, res) {
   try {
     await auth0.handleLogin(req, res, {
       authParams: {
-        prompt: 'signup'
+        initialScreen: 'signup'
       }
     });
   } catch(error) {
@@ -104,7 +104,7 @@ This parameter is then exposed to the Auth0 login page which can be used to show
 ```js
 var lock = new Auth0Lock(config.clientID, config.auth0Domain, {
   ...
-  initialScreen: (config.extraParams.prompt === 'signup' && 'signUp') || 'login',
+  initialScreen: (config.extraParams.initialScreen === 'signup' && 'signUp') || 'login',
   ...
 });
 ```

@@ -4,7 +4,7 @@ export default async function register(req, res) {
   try {
     await auth0.handleLogin(req, res, {
       authParams: {
-        prompt: 'signup'
+        initialScreen: 'signup'
       }
     });
   } catch(error) {
