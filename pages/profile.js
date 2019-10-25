@@ -1,8 +1,8 @@
 import React from 'react';
 
 import auth0 from '../lib/auth0';
-import { fetchUser } from '../lib/user'
-import Layout from '../components/layout'
+import { fetchUser } from '../lib/user';
+import Layout from '../components/layout';
 
 const Profile = ({ user }) => (
   <Layout user={user}>
@@ -17,16 +17,15 @@ const Profile = ({ user }) => (
 
 Profile.getInitialProps = async ({ req, res }) => {
   if (typeof window === 'undefined') {
-    const { user } = await auth0.getSession(req);
-    if (!user) {
+    const session = await auth0.getSession(req);
+    if (!session || !session.user) {
       res.writeHead(302, {
         Location: '/api/login'
       });
       res.end();
       return;
     }
-
-    return { user };
+    return { user: session.user };
   }
 
   const user = await fetchUser();
