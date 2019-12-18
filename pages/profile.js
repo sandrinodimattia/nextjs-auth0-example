@@ -30,6 +30,6 @@ Profile.getInitialProps = async ({ req, res }) => {
 
   const user = await fetchUser();
   return { user };
-}
+};
 
 export default Profile;
